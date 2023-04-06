@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('shipping_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            
             $table->string('name');
             $table->string('phone_number');
             $table->string('zipcode');
@@ -21,7 +22,9 @@ return new class extends Migration
             $table->string('city');
             $table->string('address1');
             $table->string('address2')->nullable();
-            $table->integer('default')->default(0);
+            $table->boolean('default')->default(false);
+            $table->boolean('delete_flag')->default(false);
+
             $table->timestamps();
         });
     }

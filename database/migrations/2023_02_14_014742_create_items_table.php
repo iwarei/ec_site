@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained();
+
             $table->string('name');
             $table->text('description');
             $table->integer('price');
+            $table->boolean('publish_flag')->default(false);
+            $table->boolean('delete_flag')->default(false);
+            
             $table->timestamps();
         });
     }
