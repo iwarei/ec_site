@@ -36,7 +36,7 @@ class CategoryController extends Controller
             'parent_id' => ['required', 'integer'],
         ]);
 
-        // 子要素指定の場合の追加バリデーション
+        // 子カテゴリの場合の追加バリデーション
         if ($request->input('child') == 'on') {
             $request->validate([
                 'parent_id' => ['integer', 'exists:App\Models\Category,id'],
@@ -45,7 +45,6 @@ class CategoryController extends Controller
 
         $category = new category;
         $category->fill($request->all())->save();
-        // $category->fill($request->only(['name', 'parent_id']))->save();
 
         return redirect(route('admin.category.index'))->with('success', 'カテゴリ：'.$category->name.'を登録しました');
     }

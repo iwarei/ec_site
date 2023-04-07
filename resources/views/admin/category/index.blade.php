@@ -1,5 +1,5 @@
 <x-admin-layout>
-  <section class="container my-3 p-4 mx-auto bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+  <section class="container md:mx-2 mx-auto my-3 p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg justify-center">
     <x-alert />
     <div class="sm:flex sm:items-center sm:justify-between">
       <div>

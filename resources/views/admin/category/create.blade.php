@@ -1,6 +1,6 @@
 <x-admin-layout>
   
-  <section class="container my-3 p-4 mx-auto bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+  <section class="container my-3 mx-2 p-4 mx-auto bg-white dark:bg-gray-800 shadow sm:rounded-lg">
     <div class="sm:flex sm:items-center sm:justify-between">
       <div>
         <div class="flex items-center gap-x-3">
