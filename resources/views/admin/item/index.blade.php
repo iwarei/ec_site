@@ -1,15 +1,9 @@
 <x-admin-layout>
-  {{-- <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-0">
-      アイテム一覧
-    </h2>
-  </x-slot> --}}
-  
-  <section class="container my-3 p-4 mx-auto bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+  <section class="container md:mx-2 mx-auto my-3 p-4 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
     <div class="sm:flex sm:items-center sm:justify-between">
       <div>
         <div class="flex items-center gap-x-3">
-          <h2 class="text-lg font-medium text-gray-800 dark:text-white">アイテム一覧</h2>
+          <h2 class="text-lg font-medium text-gray-800 dark:text-white mb-0">アイテム一覧</h2>
   
           <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{{ count($items) }} items</span>
         </div>
@@ -18,13 +12,12 @@
       </div>
   
       <div class="flex items-center mt-4 gap-x-3">
-        <button class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+        <a href="{{ route('admin.item.create') }}" class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white no-underline transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-  
           <span>アイテムを追加</span>
-        </button>
+        </a>
       </div>
     </div>
   
@@ -40,48 +33,51 @@
       </div>
     </div>
   
-    <div class="flex items-center mt-6 text-center border rounded-lg h-96 dark:border-gray-700">
-      <div class="flex flex-col w-full max-w-sm px-4 mx-auto">
-        @forelse ($items as $i -> $item)
-          @if ($i == 0) 
-            <table class="table-auto">
-              <thead>
+    <div class="flex items-center mt-6 text-center rounded-lg @if(!count($items)) border p-4 @endif">
+      <div class="flex flex-col w-full  mx-auto">
+        @forelse ($items as $i => $item)
+          @if ($i == 0)
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rounded text-gray-500 dark:text-gray-400">
+              <thead class="text-sm text-gray-700 uppercase rounded bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                  <th>公開状態</th>
-                  <th>アイテム名</th>
-                  <th>商品名</th>
-                  <th>価格</th>
-                  <th>在庫数</th>
-                  <th>販売数</th>
+                  <th scope="col" class="px-6 py-3">
+                    ID
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    カテゴリ名
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    子カテゴリ数
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    アイテム数
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    <span class="sr-only">Edit</span>
+                  </th>
                 </tr>
               </thead>
-              <tbody>        
+              <tbody>
           @endif
-              <tr>
-                {{-- 公開状態 --}}
-                <th> 
-                  @if($item->publish_flg) 
-                    <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900       dark:text-green-300">公開中</span>
-                  @else
-                    <span class="bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900      dark:text-purple-300">非公開中</span>
-                  @endif
-                </th>
-                {{-- アイテム名 --}}
-                <th></th>
-                {{-- 商品名 --}}
-                <th>
-                  {{ $item->name }}
-                </th>
-                {{-- 価格 --}}
-                <th>
-                  {{ $item->price }}
-                </th>
-                {{-- 在庫数 --}}
-                <th>
-                  {{ $item->inventory }}
-                </th>
-              </tr>
-          @if(count($item) == $i + 1)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td class="px-6 py-4">
+                    {{ $item->id }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ $item->name }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{-- {{ count($item->childCategories) }} --}}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{-- {{ $item->countItems() }} --}}
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <a href="{{ route('admin.item.show', $item) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">詳細</a>
+                  </td>
+                </tr>
+          @if (count($item) == $i + 1)
               </tbody>
             </table>
           @endif
@@ -94,20 +90,15 @@
           <h1 class="mt-3 text-lg text-gray-800 dark:text-white">アイテムが登録されていません</h1>
           <p class="mt-2 text-gray-500 dark:text-gray-400">アイテムを登録してください。</p>
           <div class="flex items-center mt-4 sm:mx-auto gap-x-3">
-            <button class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors  duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+            <a href="{{ route('admin.item.create') }}" class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white no-underline transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"  class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>アイテムを追加</span>
-            </button>
+            </a>
           </div>
         @endforelse
       </div>
     </div>
   </section>
-
-
-  
-
-
 </x-admin-layout>

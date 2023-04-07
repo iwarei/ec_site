@@ -48,4 +48,9 @@ class CategoryController extends Controller
 
         return redirect(route('admin.category.index'))->with('success', 'カテゴリ：'.$category->name.'を登録しました');
     }
+
+    public function show(Request $request, Category $category)
+    {
+        return view('admin.category.show', compact('category'));
+    }
 }
