@@ -27,7 +27,7 @@
               <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">子カテゴリとして登録する</span>
             </label>
           </div>
-          <div class="mt-0">
+          <div class="mt-0 parent-select-area hidden">
             <label for="parent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">所属する親カテゴリを選択してください</label>
             <select id="parent" name="parent_id" class="bg-gray-50 @error('parent_id') border-red-400 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option selected value="0">選択してください</option>
@@ -54,7 +54,6 @@
 
   
   <x-slot name="script">
-    <script>
-    </script>
+    <script src="{{ asset('js/admin/category,js') }}"></script>
   </x-slot>
 </x-admin-layout>
