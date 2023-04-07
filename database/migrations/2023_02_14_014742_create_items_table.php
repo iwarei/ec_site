@@ -16,11 +16,12 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
 
             $table->string('name');
-            $table->text('description');
-            $table->integer('price');
+            $table->text('description')->nullable();
+            $table->integer('price')->default(0);
+            $table->integer('inventory')->default(0);
             $table->boolean('publish_flag')->default(false);
             $table->boolean('delete_flag')->default(false);
-            
+
             $table->timestamps();
         });
     }
