@@ -29,8 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', [Admin\DashBoardController::class, 'index'])->name('index'); 
         Route::resource('category', Admin\CategoryController::class);
         Route::resource('item', Admin\ItemController::class);
+        Route::resource('user', Admin\UserController::class);
     });
 });
 

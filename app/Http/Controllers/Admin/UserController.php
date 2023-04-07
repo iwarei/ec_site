@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-class ItemController extends Controller
+class UserController extends Controller
 {
     public function index(Request $request) 
     {
@@ -18,11 +18,11 @@ class ItemController extends Controller
     }
 
 
-    // public function edit(Request $request)
-    // {
-    //     return view('profile.edit', [
-    //         'user' => $request->user(),
-    //     ]);
-    // }
+    public function edit(Request $request)
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
+    }
 
 }
