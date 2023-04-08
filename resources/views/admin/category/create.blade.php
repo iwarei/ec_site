@@ -54,6 +54,6 @@
 
   
   <x-slot name="script">
-    <script src="{{ asset('js/admin/category,js') }}"></script>
+    <script src="{{ asset('js/admin/category.js') }}"></script>
   </x-slot>
 </x-admin-layout>

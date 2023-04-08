@@ -160,6 +160,9 @@ return [
         'terms' => [
             'required' => '登録には規約への同意が必須となります。',
         ],
+        'category_id' => [
+            'integer' => ':attributeは必ず指定してください。' 
+        ]
     ],
 
     /*
@@ -247,6 +250,8 @@ return [
         'username' => 'ユーザー名',
         'year' => '年',
         'parent_id' => '親カテゴリ',
+        'descript' => '説明文章',
+        'category_id' => 'カテゴリ'
     ],
 
 ];

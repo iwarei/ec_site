@@ -29,10 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/', [Admin\DashBoardController::class, 'index'])->name('index'); 
-        Route::get('category/ajax', [Admin\CategoryApiController::class, 'index']);
+        Route::get('/', [Admin\DashBoardController::class, 'index'])->name('index');
+        // カテゴリ取得用 resourceと順番をいれかえない。 
+        Route::get('category/ajax', [Admin\CategoryXhrController::class, 'index']);
         Route::resource('category', Admin\CategoryController::class);
-
         Route::resource('item', Admin\ItemController::class);
         Route::resource('user', Admin\UserController::class);
     });
