@@ -30,7 +30,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [Admin\DashBoardController::class, 'index'])->name('index'); 
+        Route::get('category/ajax', [Admin\CategoryApiController::class, 'index']);
         Route::resource('category', Admin\CategoryController::class);
+
         Route::resource('item', Admin\ItemController::class);
         Route::resource('user', Admin\UserController::class);
     });

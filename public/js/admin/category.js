@@ -8,5 +8,4 @@ $(document).ready(function () {
       $('div.parent-select-area').addClass('hidden');
     }
   });
-
 });

@@ -12,9 +12,9 @@ class UserController extends Controller
 {
     public function index(Request $request) 
     {
-        $items = Item::query()->get();
+        // $items = Item::query()->get();
 
-        return view('admin.item.index', compact('items'));
+        // return view('admin.item.index', compact('items'));
     }
 
 
