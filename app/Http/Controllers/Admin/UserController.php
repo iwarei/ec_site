@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $users = User::query()->get();
 
-        return view('admin.item.index', compact('items'));
+        return view('admin.user.index', compact('users'));
     }
 
 }
