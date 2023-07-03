@@ -46,8 +46,6 @@ class SearchController extends Controller
 
         $items = $items->get();
 
-        dd($items);
-
         return view('user.search.index', compact('items', 'categories'));
     }
 }

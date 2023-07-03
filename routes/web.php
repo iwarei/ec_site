@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [User\HomeController::class, 'index']);
+Route::get('search', [User\SearchController::class, 'index'])->name('search.index');
+Route::resource('item', User\ItemController::class);
+
 
 // 認証関連 ログイン前 
 Route::middleware('guest')->group(function () {
@@ -72,5 +75,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('search', [User\SearchController::class, 'index'])->name('search.index');
 

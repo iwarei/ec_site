@@ -16,11 +16,9 @@
           <ul id="dropdown-category{{ $category->id }}" class="hidden py-2 space-y-2">
             @foreach ($category->childCategories as $childCategory)
               <li>
-                <form action="/search" method="GET">
-                  <button class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                    {{ $childCategory->name }}
-                  </button>
-                </form>
+                <a href="/search?category={{ $childCategory->name }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                  {{ $childCategory->name }}
+                </a>
               </li>
             @endforeach
           </ul>

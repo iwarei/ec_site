@@ -46,6 +46,10 @@ class Item extends Model
         return $this->hasMany(ItemImage::class)->orderBy('display_order');
     }
 
+    public function topImage() {
+        return $this->hasMany(ItemImage::class)->orderBy('display_order')->first();
+    }
+
     public function getTaxedPriceAttribute()
     {
         return (int) ($this->price * (100 + config('const.TAX_RATE')) / 100);
