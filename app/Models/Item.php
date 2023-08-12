@@ -47,7 +47,12 @@ class Item extends Model
     }
 
     public function topImage() {
-        return $this->hasMany(ItemImage::class)->orderBy('display_order')->first();
+        return optional($this->hasMany(ItemImage::class)->orderBy('display_order')->first())->src ?? asset('image/noimage.jpg');
+    }
+
+    public function review() {
+        // ToDo 商品のレビュー評価を返すようにする レビュー用のテーブル作成後対応
+        return 4.7;
     }
 
     public function getTaxedPriceAttribute()
