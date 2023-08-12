@@ -7,7 +7,10 @@ return array(
     'IMAGE_QUALITY' => 85,
     'IMAGE_EXTENSION' => 'jpg',
 
-    'ARTICLE_PAGE_COUNT'=> 10,
+    /* デフォルトの検索結果表示数 */
+    'ITEMS_SHOW_COUNT'=> 25,
 
+    /* 税率 */
     'TAX_RATE' => 10,
+
 );

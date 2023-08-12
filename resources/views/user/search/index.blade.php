@@ -3,6 +3,12 @@
 @section ('content')
   <div class="container px-5 mx-auto mt-16">
     @forelse($items as $item)
+      {{-- 検索結果: ヒットした商品あり --}}
+      @if ($loop->first)
+        <div>
+          検索結果: {{ count($items) }}件の商品が見つかりました。
+        </div>
+      @endif 
       <a href="{{ route('item.show', $item) }}">
         <div class="row rounded border bg-white mb-2">
           <div class="col-3 border-e">
@@ -19,8 +25,11 @@
 
         </div>
       </a>
-
+      {{-- @if ($loop->last) --}}
+        {{ $items->links() }}
+      {{-- @endif --}}
     @empty
+      {{-- 検索結果: ヒットした商品無 --}}
       <p>一致する商品が見つかりませんでした。</p>
     @endforelse
   </div>
