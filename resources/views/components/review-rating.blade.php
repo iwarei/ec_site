@@ -1,4 +1,4 @@
-@props(['item', 'showModal' => false, 'modalName' => 'modal', 'showRate' => false])
+@props(['item', 'showModal' => false, 'modalName' => 'modal', 'showRate' => false, 'itemPage' => false])
 
 @php
   $tempReview = $item->review();
@@ -32,7 +32,7 @@
   @endfor
   
   {{-- 評価レーティング表示 --}}
-  @if ($showRate)
+  @if ($showRate || $itemPage)
     <span class="ml-2">
       <span class="text-sm">
         ({{ $item->review() }})
@@ -41,7 +41,7 @@
   @endif
   
   {{-- 評価詳細表示モーダルボタン --}}
-  @if ($showModal)
+  @if ($showModal || $itemPage)
     <span class="ml-2">
       <button data-modal-target="{{ $modalName }}" data-modal-toggle="{{ $modalName }}" class="text-sm py-2" type="button">
         <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -128,7 +128,7 @@
                 </tbody>
               </table>
             </div>
-            <hr class="h-px my-3 bg-gray-500 border-0">
+            <hr class="h-px my-3 pl-3 bg-gray-500 border-0">
             <div class="flex justify-center">
               <a href="{{ route('item.show', $item).'#review' }}">カスタマーレビューを見る ></a>
             </div>
@@ -136,5 +136,20 @@
         </div>
       </div>
     </div> 
+  @endif
+
+  @if ($itemPage)
+  <div class="pl-2">
+    {{-- ToDo: 実際の評価数にする --}}
+    <span>
+      {{ number_format(1000) }}件の評価&nbsp
+    </span>
+    {{-- ToDo: 質問機能実装と実表示化 --}}
+    @if (true)
+      <span>
+        | {{ number_format(1000) }}件の質問に回答済
+      </span>
+    @endif
+  </div>
   @endif
 </div>

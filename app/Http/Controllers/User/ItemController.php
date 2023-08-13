@@ -17,6 +17,6 @@ class ItemController extends Controller
             ->where('parent_id', 0)
             ->get();
 
-        return view('user.search.index', compact('item', 'categories'));
+        return view('user.item.show', compact('item', 'categories'));
     }
 }
