@@ -46,6 +46,15 @@ class Item extends Model
         return $this->hasMany(ItemImage::class)->orderBy('display_order');
     }
 
+    public function topImage() {
+        return optional($this->hasMany(ItemImage::class)->orderBy('display_order')->first())->src ?? asset('image/noimage.jpg');
+    }
+
+    public function review() {
+        // ToDo 商品のレビュー評価を返すようにする レビュー用のテーブル作成後対応
+        return 4.7;
+    }
+
     public function getTaxedPriceAttribute()
     {
         return (int) ($this->price * (100 + config('const.TAX_RATE')) / 100);

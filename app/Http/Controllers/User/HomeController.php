@@ -13,7 +13,6 @@ class HomeController extends Controller
         $categories = Category::query()
             ->where('parent_id', 0)
             ->get();
-            
         return view('user.home.index', compact('categories'));
     }
 }

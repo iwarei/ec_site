@@ -24,6 +24,7 @@ class SearchController extends Controller
             $words = explode(' ', mb_convert_kana($request->input('words'), 'aKs'));
 
             foreach ($words as $word) {
+                // ToDo: インジェクション対策
                 $items = $items->where(DB::raw("CONCAT(name, ' ', description)"), 'LIKE', '%' . $word . '%');
             }
         }
@@ -44,9 +45,7 @@ class SearchController extends Controller
             }
         }
 
-        $items = $items->get();
-
-        dd($items);
+        $items = $items->paginate(config('const.ITEMS_SHOW_COUNT'));
 
         return view('user.search.index', compact('items', 'categories'));
     }
