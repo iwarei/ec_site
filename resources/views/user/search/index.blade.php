@@ -14,12 +14,12 @@
               <a href="#">
                 <img src="{{ $item->topImage() }}">
               </a>
-              <div class="px-5 pb-5">
+              <div class="px-3 pb-4">
                 <a href="#">
                   <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ $item->name }}</h5>
                 </a>
                 {{-- レビュー評価 --}}
-                <x-review-rating :review="$item->review()" />
+                <x-review-rating :item="$item" showModal="true" showRate="true" />
                 {{-- 金額表示 --}}
                 <div class="flex items-end">
                   {{-- 税込表示 --}}
