@@ -129,8 +129,8 @@
               </table>
             </div>
             <hr class="h-px my-3 bg-gray-500 border-0">
-            <div>
-              <a href="{{ route('item.show', $item).'#review' }}">カスタマーレビューを見る</a>
+            <div class="flex justify-center">
+              <a href="{{ route('item.show', $item).'#review' }}">カスタマーレビューを見る ></a>
             </div>
           </div>
         </div>
