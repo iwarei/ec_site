@@ -107,9 +107,6 @@ class ItemController extends Controller
 
     public function show(Item $item) 
     {
-        // 後程作るため一旦リダイレクト
-        // dd($item);
-        // return view('admin.item.show', compact('item'));
         return redirect(route('admin.item.edit', compact('item')));
     }
 
@@ -125,8 +122,6 @@ class ItemController extends Controller
 
     public function update(Request $request, Item $item)
     {
-
-        // dd($request);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'category_id' =>  ['required', 'integer', 'exists:App\Models\Category,id'],
@@ -153,7 +148,6 @@ class ItemController extends Controller
             foreach ($images as $i => $image) {
                 preg_match('/\/([\w-]+\.jpg)$/', $image, $matches);
 
-                // dd($matches);
                 if ($matches){
                     $find = ItemImage::query()
                         ->where('filename', $matches[1])

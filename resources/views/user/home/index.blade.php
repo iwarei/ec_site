@@ -34,7 +34,6 @@
 
     {{-- 注文履歴 (ログインユーザのみ) --}}
     @auth
-      {{-- ToDo: 注文履歴がある場合のみ表示する --}}
       @if (count($histories))
       <div class="w-full mb-2 px-4 py-2 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
         <h5 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">過去に注文した商品</h5>

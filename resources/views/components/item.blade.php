@@ -2,7 +2,7 @@
 
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
   <a href="{{ route('item.show', $item) }}">
-    <img src="{{ $item->topImage() }}">
+    <img src="{{ $item->topImage() }}" class="block w-full object-scale-down" style="aspect-ratio: 1/1">
     <div class="px-3 pb-4">
       <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ $item->name }}</h5>
       @if (!$showSimple)
