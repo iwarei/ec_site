@@ -24,7 +24,7 @@ class HomeController extends Controller
             ->get();
         
         // おすすめ表示 
-        // ToDo: 実際に注文済みの商品のみ表示
+        // ToDo: レビュー評価が高いものを表示
         $reccomends = Item::query()
             ->inRandomOrder()
             ->take(4)
