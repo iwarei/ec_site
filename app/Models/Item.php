@@ -51,7 +51,7 @@ class Item extends Model
     public function authedUserReview()
     {
         if (Auth::check()){
-            return $this->hasMany(Review::class)->where('user_id', Auth::id())->get();
+            return $this->reviews->where('user_id', Auth::id())->first();
         }
         else {
             return null;

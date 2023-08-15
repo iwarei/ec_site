@@ -38,10 +38,11 @@ class ReviewController extends Controller
             'detail' => ['required', 'min: 5'],
         ]);
 
-        $review = new Review();
+        $review = Review::firstOrNew([
+            'user_id' => Auth::id(),
+            'item_id' => $item->id,
+        ]);
         $review->fill($request->all());
-        $review->user_id = Auth::id();
-        $review->item_id = $item->id;
 
         $review->save();
 
@@ -60,22 +61,9 @@ class ReviewController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Review $review)
-    {
-        //
-    }
+    // 更新と投稿処理を同一としているため、editとupdateは不要
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Review $review)
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      */
