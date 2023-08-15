@@ -251,7 +251,10 @@ return [
         'year' => '年',
         'parent_id' => '親カテゴリ',
         'descript' => '説明文章',
-        'category_id' => 'カテゴリ'
+        'category_id' => 'カテゴリ',
+        'rating' => '評価',
+        'title' => 'タイトル',
+        'detail' => '詳細',
     ],
 
 ];

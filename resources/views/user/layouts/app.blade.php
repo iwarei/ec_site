@@ -24,6 +24,7 @@
 
             <!-- Page Content -->
             <main>
+                <x-alert />
                 @yield('content')
             </main>
         </div>

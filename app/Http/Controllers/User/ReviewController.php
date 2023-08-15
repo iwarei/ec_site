@@ -23,7 +23,7 @@ class ReviewController extends Controller
         $categories = Category::query()
         ->where('parent_id', 0)
         ->get();
-
+        
         return view('user.review.create', compact('item', 'categories'));
     }
 
@@ -32,7 +32,24 @@ class ReviewController extends Controller
      */
     public function store(Request $request, Item $item)
     {
-        
+        $request->validate([
+            'rating' => ['required', 'numeric', 'integer'],
+            'title' => ['required', 'string', 'max:64'],
+            'detail' => ['required', 'min: 5'],
+        ]);
+
+        $review = new Review();
+        $review->fill($request->all());
+        $review->user_id = Auth::id();
+        $review->item_id = $item->id;
+
+        $review->save();
+
+        $categories = Category::query()
+        ->where('parent_id', 0)
+        ->get();
+
+        return redirect(route('item.show', compact('item', 'categories')))->with('success', 'レビューを投稿しました。');
     }
 
     /**

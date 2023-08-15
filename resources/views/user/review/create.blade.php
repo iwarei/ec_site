@@ -19,40 +19,41 @@
           {{-- ToDo: 評価選択 部品化する --}}
           <div class="flex">
             <label class="flex items-center p-1">
-              <input id="rating-radio1" name="rating" type="radio" value="1" class="absolute w-8 h-8 opacity-0 border-none">
+              <input id="rating-radio1" name="rating" type="radio" value="1" class="absolute w-8 h-8 opacity-0 border-none" {{ (old('rating') == 1 ? 'checked' : '') }}>
               <svg class="w-8 h-8 text-gray-200" name="rating-star" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
               </svg>
             </label>
 
             <label class="flex items-center p-1">
-              <input id="rating-radio2" name="rating" type="radio" value="2" class="absolute w-8 h-8 opacity-0 border-none">
+              <input id="rating-radio2" name="rating" type="radio" value="2" class="absolute w-8 h-8 opacity-0 border-none" {{ (old('rating') == 2 ? 'checked' : '') }}>
               <svg class="w-8 h-8 text-gray-200" name="rating-star" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
               </svg>
             </label>
 
             <label class="flex items-center p-1">
-              <input id="rating-radio3" name="rating" type="radio" value="3" class="absolute w-8 h-8 opacity-0 border-none">
+              <input id="rating-radio3" name="rating" type="radio" value="3" class="absolute w-8 h-8 opacity-0 border-none" {{ (old('rating') == 3 ? 'checked' : '') }}>
               <svg class="w-8 h-8 text-gray-200" name="rating-star" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
               </svg>
             </label>
 
             <label class="flex items-center p-1">
-              <input id="rating-radio4" name="rating" type="radio" value="4" class="absolute w-8 h-8 opacity-0 border-none">
+              <input id="rating-radio4" name="rating" type="radio" value="4" class="absolute w-8 h-8 opacity-0 border-none" {{ (old('rating') == 4 ? 'checked' : '') }}>
               <svg class="w-8 h-8 text-gray-200" name="rating-star" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
               </svg>
             </label>
 
             <label class="flex items-center p-1">
-              <input id="rating-radio5" name="rating" type="radio" value="5" class="absolute w-8 h-8 opacity-0 border-none">
+              <input id="rating-radio5" name="rating" type="radio" value="5" class="absolute w-8 h-8 opacity-0 border-none" {{ (old('rating') == 5 ? 'checked' : '') }}>
               <svg class="w-8 h-8 text-gray-200" name="rating-star" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
               </svg>
             </label>
           </div>
+          <x-validation-error name='rating' />
         </div>
         <x-hr />
         {{-- レビュータイトル --}}
@@ -60,9 +61,10 @@
           <label class="w-full">
             <h5>レビュータイトル</h5>
             <div class="mb-2">
-            <input type="text" name="title" placeholder="最も伝えたいポイントは何ですか？" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-          </div>
-        </label>
+              <input type="text" name="title" placeholder="最も伝えたいポイントは何ですか？" value="{{ old('title') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+          </label>
+          <x-validation-error name='title' />
         </div>
         <x-hr />
         {{-- ToDo: 画像または動画を追加する --}}
@@ -71,8 +73,11 @@
         <div>
           <label class="w-full">
             <h5>レビューを追加</h5>
-            <textarea rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="気に入ったこと/気に入らなかったことは何ですか？この製品をどのように使いましたか？"></textarea>
+            <textarea rows="8" name="detail" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="気に入ったこと/気に入らなかったことは何ですか？この製品をどのように使いましたか？">
+              {{ old('detail') }}
+            </textarea>
           </label>
+          <x-validation-error name='detail' />
         </div>
         <x-hr />
         <div class="pe-2 text-end">
@@ -91,7 +96,7 @@
   {{-- 総合評価の選択用JS --}}
   <script>
     const radios = document.getElementsByName('rating');
-    const stars = document.getElementsByName('rating-star')
+    const stars = document.getElementsByName('rating-star');
 
     // 選択された評価値を取得
     for (let i = 0; i < radios.length; i++) {
@@ -114,5 +119,12 @@
         }
       }
     };
+    
+    // 初期表示用 (バリデーションに引っかかった際)
+    const selectedElement = document.querySelector('input[name="rating"]:checked');
+    const initialValue = checkedElement ? checkedElement.value : '';
+    if (initialValue) {
+      changeStarColor(initialValue);
+    }
   </script>
 @endsection
