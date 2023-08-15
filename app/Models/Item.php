@@ -47,7 +47,7 @@ class Item extends Model
         return $this->hasMany(Review::class);
     }
 
-    // ログインユーザが投稿したレビュー
+    // 認証済みユーザが投稿したレビュー
     public function authedUserReview()
     {
         if (Auth::check()){
@@ -56,6 +56,17 @@ class Item extends Model
         else {
             return null;
         }
+    }
+
+    // 指定した評価のレビューを取得する
+    public function reviewRate($rate) {
+        return $this->reviews->where('rating', $rate);
+    }
+
+    // レビューの平均評価取得用アクセサ
+    public function getAvgRateAttribute() 
+    {
+        return number_format($this->reviews->avg('rating'), 1);
     }
 
     public function images() 
