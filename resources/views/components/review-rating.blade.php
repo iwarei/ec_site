@@ -105,7 +105,7 @@
             <div class="mb-3">
               <table class="w-full">
                 <tbody>
-                  @for ($i = 1; $i <= 5; $i++)
+                  @for ($i = 5; $i > 0; $i--)
                     <tr class="h-8">
                       <td class="w-1/5 lg:w-1/6 text-center">
                         <span>
@@ -124,7 +124,7 @@
                       
                       <td class="w-1/5 lg:w-1/6 text-center">
                         <span>
-                          {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}
+                          {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%
                         </span>
                       </td>
                     </tr>
@@ -165,7 +165,7 @@
   <div class="mb-4">
     <table class="w-full mb-3">
       <tbody>
-        @for ($i = 1; $i <= 5; $i++)
+        @for ($i = 5; $i > 0; $i--)
           <tr class="h-8">
             <td class="w-1/5 lg:w-1/6 text-center">
               <span>
