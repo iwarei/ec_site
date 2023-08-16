@@ -20,10 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [User\HomeController::class, 'index']);
 Route::get('search', [User\SearchController::class, 'index'])->name('search.index');
 Route::resource('item', User\ItemController::class);
+Route::resource('reviewer', User\ReviewController::class)->only(['show']);
 
 // 認証が必要な機能
 Route::middleware('auth')->group(function () {
-    Route::resource('item.review', User\ReviewController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('item.review', User\ReviewController::class)->only(['create', 'store', 'destroy']);
+    Route::resource('reviewer', User\ReviewerController::class)->only(['create', 'store']);
 });
 
 
