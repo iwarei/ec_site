@@ -115,8 +115,8 @@
                       <td class="w-3/5 lg:w-4/6">
                         <span>
                           <div class="h-6 w-full bg-gray-200 rounded-full">
-                            @if (count($item->reviewRate($i)) / count($item->reviews))
-                            <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%"></div>
+                            @if (count($item->reviewRate($i)) && count($item->reviews))
+                              <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%"></div>
                             @endif
                           </div>                
                         </span>
@@ -124,7 +124,7 @@
                       
                       <td class="w-1/5 lg:w-1/6 text-center">
                         <span>
-                          {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%
+                          {{count($item->reviews) ? (count($item->reviewRate($i)) / count($item->reviews)) * 100 : 0 }}%
                         </span>
                       </td>
                     </tr>
@@ -175,7 +175,7 @@
             <td class="w-3/5 lg:w-4/6">
               <span>
                 <div class="h-6 w-full bg-gray-200 rounded-full">
-                  @if (count($item->reviewRate($i)) / count($item->reviews))
+                  @if (count($item->reviewRate($i)) && count($item->reviews))
                     <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%"></div>
                   @endif
                 </div>                
@@ -184,7 +184,7 @@
 
             <td class="w-1/5 lg:w-1/6 text-center">
               <span>
-                {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%
+                {{ count($item->reviews) ? (count($item->reviewRate($i)) / count($item->reviews)) * 100 : 0 }}%
               </span>
             </td>
           </tr>
