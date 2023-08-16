@@ -25,7 +25,7 @@
         {{-- 総合評価 --}}
         <div>
           <h5>総合評価</h5>
-          <x-select-rating :item='$item' name='rating' />
+          <x-select-rating name='rating' :item='$item'  />
           <x-validation-error name='rating' />
         </div>
         <x-hr />

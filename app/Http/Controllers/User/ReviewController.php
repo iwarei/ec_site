@@ -20,11 +20,7 @@ class ReviewController extends Controller
      */
     public function create(Item $item)
     {
-        $categories = Category::query()
-        ->where('parent_id', 0)
-        ->get();
-        
-        return view('user.review.create', compact('item', 'categories'));
+        return view('user.review.create', compact('item'));
     }
 
     /**
@@ -46,11 +42,7 @@ class ReviewController extends Controller
 
         $review->save();
 
-        $categories = Category::query()
-        ->where('parent_id', 0)
-        ->get();
-
-        return redirect(route('item.show', compact('item', 'categories')))->with('success', 'レビューを投稿しました。');
+        return redirect(route('item.show', compact('item')))->with('success', 'レビューを投稿しました。');
     }
 
     /**
