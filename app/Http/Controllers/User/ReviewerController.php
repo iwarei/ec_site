@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reviewer;
@@ -13,7 +13,7 @@ class ReviewerController extends Controller
      */
     public function create()
     {
-        
+        return view('user.reviewer.create');
     }
 
     /**
