@@ -47,6 +47,14 @@ class Item extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function topReviews() {
+        return $this->reviews->take(5);
+    }
+
+    public function newReviews() {
+        return $this->reviews->sortByDesc('id')->take(5);
+    }
+
     // 認証済みユーザが投稿したレビュー
     public function authedUserReview()
     {

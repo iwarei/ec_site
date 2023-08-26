@@ -16,6 +16,17 @@ class Review extends Model
     ];
 
     public function item() {
-        $this->belongsTo(Item::class);
+        return $this->belongsTo(Item::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function reviewew() {
+        // $this->belongsTo(Reviewer::class);
+        // $this->hasOne(Reviewer::class);
+
+        return $this->belongsTo(User::class);
     }
 }

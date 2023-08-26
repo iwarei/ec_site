@@ -3,14 +3,15 @@
 @section ('content')
   <div class="w-full my-2 px-4 mx-4 py-2 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8">
     <div class="text-start">
-      <a href="{{ route('reviewer.create') }}" target="_blank" class="flex mb-2 p-2 bg-cyan-100 rounded">
-        <img src="{{ Auth::user()?->reviewer()?->iconSrc ?? asset('image/default_icon.jpg') }}" class="h-10 w-10 rounded-pill">
-        <span class="p-2 mx-2">
-          {{ Auth::user()?->reviewer()?->name ?? 'レビュー投稿の前に、プロフィール情報を登録してください。'  }}
-        </span>
-      </a>
-
-      </a>
+      {{ dd(Auth::user()->reviewer) }}
+      @if (Auth::user()->reviewer())
+        <a href="{{ route('reviewer.create') }}" target="_blank" class="flex mb-2 p-2 bg-cyan-100 rounded">
+          <img src="{{ Auth::user()?->reviewer()?->iconSrc ?? asset('image/default_icon.jpg') }}" class="h-10 w-10 rounded-pill">
+          <span class="p-2 mx-2">
+            {{ Auth::user()?->reviewer()?->name ?? 'レビュー投稿の前に、プロフィール情報を登録してください。'  }}
+          </span>
+        </a>
+      @endif
 
       <h4>この商品をレビュー</h4>
       <a href="{{ route('item.show', $item) }}" target="_blank" class="flex">
