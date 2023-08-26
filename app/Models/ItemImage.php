@@ -31,6 +31,4 @@ class ItemImage extends Model
     public function getPathAttribute() {
         return 'public/items/' . $this->item->id . '/' . $this->filename;
     }
-
-
 }

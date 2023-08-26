@@ -45,6 +45,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function reviewer() {
+        $this->hasOne(Reviewer::class);
+    }
+
     public function getFullNameAttribute() {
         return "{$this->last_name} {$this->first_name}";
     }

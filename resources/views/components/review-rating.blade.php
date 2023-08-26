@@ -1,10 +1,10 @@
-@props(['item', 'showModal' => false, 'modalName' => 'modal', 'showRate' => false])
+@props(['item', 'showModal' => false, 'modalName' => 'modal', 'showRate' => false, 'itemPage' => false, 'reviewArea' => false])
 
 @php
-  $tempReview = $item->review();
+  $tempReview = $item->avgRate;
 @endphp
 
-<div class="flex items-center mt-2.5 mb-3">
+<div class="flex items-center">
   {{-- スター表示 --}}
   @for ($i = 0; $i < 5; $i++)
     @if ($tempReview >= 1.0)
@@ -32,16 +32,20 @@
   @endfor
   
   {{-- 評価レーティング表示 --}}
-  @if ($showRate)
+  @if ($showRate || $itemPage || $reviewArea)
     <span class="ml-2">
       <span class="text-sm">
-        ({{ $item->review() }})
+        @if ($reviewArea)
+          {{ $item->avgRate }}&nbsp/&nbsp5.0
+        @else
+          ({{ $item->avgRate }})
+        @endif
       </span>
     </span>
   @endif
-  
+
   {{-- 評価詳細表示モーダルボタン --}}
-  @if ($showModal)
+  @if ($showModal || $itemPage)
     <span class="ml-2">
       <button data-modal-target="{{ $modalName }}" data-modal-toggle="{{ $modalName }}" class="text-sm py-2" type="button">
         <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -52,8 +56,8 @@
     <div id="{{ $modalName }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="{{ $modalName }}">
+        <div class="relative bg-white rounded-lg shadow">
+          <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="{{ $modalName }}">
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
             </svg>
@@ -61,7 +65,7 @@
           </button>
           <div class="px-4 py-4 lg:px-6">
             @php
-              $tempReview = $item->review()
+              $tempReview = $item->avgRate;
             @endphp
             <div class="flex items-center mt-2.5 mb-3">
               {{-- スター表示 --}}
@@ -91,36 +95,36 @@
               @endfor
               <span class="ml-2">
                 <span class="text-sm">
-                  ({{ $item->review() }})
+                  ({{ $item->avgRate }})
                 </span>
               </span>          
             </div>
             <div class="mb-3">
-              {{-- ToDo: 評価数を実際の評価数にする --}}
-              {{ number_format(1000) }}件のグローバル評価
+              {{ number_format(count($item->reviews)) }}件のグローバル評価
             </div>
             <div class="mb-3">
               <table class="w-full">
                 <tbody>
-                  @for ($i = 0; $i < 5; $i++)
+                  @for ($i = 5; $i > 0; $i--)
                     <tr class="h-8">
                       <td class="w-1/5 lg:w-1/6 text-center">
                         <span>
-                          星{{ $i + 1 }}つ
+                          星{{ $i }}つ
                         </span>
                       </td>
                       <td class="w-3/5 lg:w-4/6">
                         <span>
-                          <div class="h-6 w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                            <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: 20%"></div>
+                          <div class="h-6 w-full bg-gray-200 rounded-full">
+                            @if (count($item->reviewRate($i)) && count($item->reviews))
+                              <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%"></div>
+                            @endif
                           </div>                
                         </span>
                       </td>
                       
                       <td class="w-1/5 lg:w-1/6 text-center">
                         <span>
-                          {{-- ToDo: 評価比率を実数値にする --}}
-                          20%
+                          {{count($item->reviews) ? (count($item->reviewRate($i)) / count($item->reviews)) * 100 : 0 }}%
                         </span>
                       </td>
                     </tr>
@@ -128,7 +132,7 @@
                 </tbody>
               </table>
             </div>
-            <hr class="h-px my-3 bg-gray-500 border-0">
+            <x-hr /> 
             <div class="flex justify-center">
               <a href="{{ route('item.show', $item).'#review' }}">カスタマーレビューを見る ></a>
             </div>
@@ -137,4 +141,55 @@
       </div>
     </div> 
   @endif
+
+  @if ($itemPage)
+  <div class="pl-2">
+    <span>
+      {{ number_format(count($item->reviews)) }}件の評価&nbsp
+    </span>
+    {{-- ToDo: 質問機能実装と実表示化 --}}
+    @if (true)
+      <span>
+        | {{ number_format(1000) }}件の質問に回答済
+      </span>
+    @endif
+  </div>
+  @endif
 </div>
+
+{{-- 評価表示 --}}
+@if ($reviewArea)
+  <div class="mb-3">
+    {{ number_format(count($item->reviews)) }}件のグローバル評価
+  </div>
+  <div class="mb-4">
+    <table class="w-full mb-3">
+      <tbody>
+        @for ($i = 5; $i > 0; $i--)
+          <tr class="h-8">
+            <td class="w-1/5 lg:w-1/6 text-center">
+              <span>
+                星{{ $i }}つ
+              </span>
+            </td>
+            <td class="w-3/5 lg:w-4/6">
+              <span>
+                <div class="h-6 w-full bg-gray-200 rounded-full">
+                  @if (count($item->reviewRate($i)) && count($item->reviews))
+                    <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%"></div>
+                  @endif
+                </div>                
+              </span>
+            </td>
+
+            <td class="w-1/5 lg:w-1/6 text-center">
+              <span>
+                {{ count($item->reviews) ? (count($item->reviewRate($i)) / count($item->reviews)) * 100 : 0 }}%
+              </span>
+            </td>
+          </tr>
+        @endfor
+      </tbody>
+    </table>
+  </div>
+@endif

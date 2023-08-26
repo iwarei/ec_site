@@ -12,10 +12,6 @@ class HomeController extends Controller
 {
     public function index(Request $request) 
     {
-        $categories = Category::query()
-            ->where('parent_id', 0)
-            ->get();
-
         // 人気商品の表示
         // ToDo: 実際に注文数が多いものを表示
         $populars = Item::query()
@@ -24,7 +20,7 @@ class HomeController extends Controller
             ->get();
         
         // おすすめ表示 
-        // ToDo: 実際に注文済みの商品のみ表示
+        // ToDo: レビュー評価が高いものを表示
         $reccomends = Item::query()
             ->inRandomOrder()
             ->take(4)
@@ -40,6 +36,6 @@ class HomeController extends Controller
                 ->get();
         }
         
-        return view('user.home.index', compact('categories', 'populars', 'reccomends', 'histories' ));
+        return view('user.home.index', compact('populars', 'reccomends', 'histories' ));
     }
 }
