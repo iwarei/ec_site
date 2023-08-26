@@ -13,10 +13,6 @@ class SearchController extends Controller
 {
     public function index(Request $request) 
     {
-        $categories = Category::query()
-            ->where('parent_id', 0)
-            ->get();
-
         $items = Item::query();
         
         if ($request->filled('words')) {
@@ -47,6 +43,6 @@ class SearchController extends Controller
 
         $items = $items->paginate(config('const.ITEMS_SHOW_COUNT'));
 
-        return view('user.search.index', compact('items', 'categories'));
+        return view('user.search.index', compact('items'));
     }
 }

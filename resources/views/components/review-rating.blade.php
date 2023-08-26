@@ -1,7 +1,7 @@
 @props(['item', 'showModal' => false, 'modalName' => 'modal', 'showRate' => false, 'itemPage' => false, 'reviewArea' => false])
 
 @php
-  $tempReview = $item->review();
+  $tempReview = $item->avgRate;
 @endphp
 
 <div class="flex items-center">
@@ -36,9 +36,9 @@
     <span class="ml-2">
       <span class="text-sm">
         @if ($reviewArea)
-          {{ $item->review() }}&nbsp/&nbsp5.0
+          {{ $item->avgRate }}&nbsp/&nbsp5.0
         @else
-          ({{ $item->review() }})
+          ({{ $item->avgRate }})
         @endif
       </span>
     </span>
@@ -65,7 +65,7 @@
           </button>
           <div class="px-4 py-4 lg:px-6">
             @php
-              $tempReview = $item->review()
+              $tempReview = $item->avgRate;
             @endphp
             <div class="flex items-center mt-2.5 mb-3">
               {{-- スター表示 --}}
@@ -95,36 +95,36 @@
               @endfor
               <span class="ml-2">
                 <span class="text-sm">
-                  ({{ $item->review() }})
+                  ({{ $item->avgRate }})
                 </span>
               </span>          
             </div>
             <div class="mb-3">
-              {{-- ToDo: 評価数を実際の評価数にする --}}
-              {{ number_format(1000) }}件のグローバル評価
+              {{ number_format(count($item->reviews)) }}件のグローバル評価
             </div>
             <div class="mb-3">
               <table class="w-full">
                 <tbody>
-                  @for ($i = 0; $i < 5; $i++)
+                  @for ($i = 5; $i > 0; $i--)
                     <tr class="h-8">
                       <td class="w-1/5 lg:w-1/6 text-center">
                         <span>
-                          星{{ $i + 1 }}つ
+                          星{{ $i }}つ
                         </span>
                       </td>
                       <td class="w-3/5 lg:w-4/6">
                         <span>
                           <div class="h-6 w-full bg-gray-200 rounded-full">
-                            <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: 20%"></div>
+                            @if (count($item->reviewRate($i)) && count($item->reviews))
+                              <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%"></div>
+                            @endif
                           </div>                
                         </span>
                       </td>
                       
                       <td class="w-1/5 lg:w-1/6 text-center">
                         <span>
-                          {{-- ToDo: 評価比率を実数値にする --}}
-                          20%
+                          {{count($item->reviews) ? (count($item->reviewRate($i)) / count($item->reviews)) * 100 : 0 }}%
                         </span>
                       </td>
                     </tr>
@@ -144,9 +144,8 @@
 
   @if ($itemPage)
   <div class="pl-2">
-    {{-- ToDo: 実際の評価数にする --}}
     <span>
-      {{ number_format(1000) }}件の評価&nbsp
+      {{ number_format(count($item->reviews)) }}件の評価&nbsp
     </span>
     {{-- ToDo: 質問機能実装と実表示化 --}}
     @if (true)
@@ -161,31 +160,31 @@
 {{-- 評価表示 --}}
 @if ($reviewArea)
   <div class="mb-3">
-    {{-- ToDo: 評価数を実際の評価数にする --}}
-    {{ number_format(1000) }}件のグローバル評価
+    {{ number_format(count($item->reviews)) }}件のグローバル評価
   </div>
   <div class="mb-4">
     <table class="w-full mb-3">
       <tbody>
-        @for ($i = 0; $i < 5; $i++)
+        @for ($i = 5; $i > 0; $i--)
           <tr class="h-8">
             <td class="w-1/5 lg:w-1/6 text-center">
               <span>
-                星{{ $i + 1 }}つ
+                星{{ $i }}つ
               </span>
             </td>
             <td class="w-3/5 lg:w-4/6">
               <span>
                 <div class="h-6 w-full bg-gray-200 rounded-full">
-                  <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: 20%"></div>
+                  @if (count($item->reviewRate($i)) && count($item->reviews))
+                    <div class="h-6 bg-yellow-300 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full py-1.5" style="width: {{ (count($item->reviewRate($i)) / count($item->reviews)) * 100 }}%"></div>
+                  @endif
                 </div>                
               </span>
             </td>
 
             <td class="w-1/5 lg:w-1/6 text-center">
               <span>
-                {{-- ToDo: 評価比率を実数値にする --}}
-                20%
+                {{ count($item->reviews) ? (count($item->reviewRate($i)) / count($item->reviews)) * 100 : 0 }}%
               </span>
             </td>
           </tr>

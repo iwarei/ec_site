@@ -13,10 +13,6 @@ class ItemController extends Controller
 {
     public function show(Request $request, Item $item) 
     {
-        $categories = Category::query()
-            ->where('parent_id', 0)
-            ->get();
-
-        return view('user.item.show', compact('item', 'categories'));
+        return view('user.item.show', compact('item'));
     }
 }

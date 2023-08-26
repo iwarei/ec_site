@@ -17,9 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// 認証不要機能
 Route::get('/', [User\HomeController::class, 'index']);
 Route::get('search', [User\SearchController::class, 'index'])->name('search.index');
 Route::resource('item', User\ItemController::class);
+
+// 認証が必要な機能
+Route::middleware('auth')->group(function () {
+    Route::resource('item.review', User\ReviewController::class)->only(['create', 'store', 'destroy']);
+    Route::resource('reviewer', User\ReviewerController::class)->only(['create', 'store']);
+});
+// 定義順の関連でここで定義 (認証不要機能)
+Route::resource('reviewer', User\ReviewerController::class)->only(['show']);
+
 
 
 // 認証関連 ログイン前 
